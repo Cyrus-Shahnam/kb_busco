@@ -1,0 +1,21 @@
+module-name:
+    kb_busco
+
+module-description:
+    Assess genome assembly completeness with BUSCO v6.1.0 (OrthoDB v12.2 lineage datasets).
+
+service-language:
+    python
+
+module-version:
+    0.1.0
+
+owners:
+    [ac.shahnam, cshahnam]
+
+service-config:
+    dynamic-service: false
+
+# Reference data: bumping this re-runs `entrypoint.sh init` at registration,
+# which downloads the lineages in data/refdata_lineages.txt into /data.
+data-version: 0.1

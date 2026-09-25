@@ -1,0 +1,11 @@
+# Lineage datasets downloaded ONCE into /data at catalog registration
+# (entrypoint.sh init). One name per line. Anything not listed here is
+# downloaded into the job's scratch at run time instead (slower, needs network).
+#
+# odb12.2 datasets require BUSCO >= 6.1.0.
+# Bulk keywords also work: prokaryota, eukaryota, virus, all -- but they are
+# large; check disk with KBase staff before enabling. The bulk sets are also what
+# --auto-lineage needs to run fully from /data.
+bacteria_odb12.2
+archaea_odb12.2
+eukaryota_odb12.2

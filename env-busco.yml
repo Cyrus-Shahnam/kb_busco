@@ -1,0 +1,9 @@
+name: busco
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - busco=6.1.0
+  # BUSCO user guide: SEPP 4.5.6 gives wrong auto-lineage placements; pin 4.5.5.
+  - sepp=4.5.5
+ 

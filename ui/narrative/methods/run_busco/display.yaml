@@ -1,0 +1,105 @@
+#
+# define display information
+#
+name: Assess Genome Completeness with BUSCO - v6.1.0
+
+tooltip: |
+    Estimate assembly completeness from near-universal single-copy orthologs (BUSCO v6.1.0, OrthoDB v12.2 datasets).
+
+screenshots: []
+
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+parameters :
+    input_assembly_refs :
+        ui-name : |
+            Assemblies
+        short-hint : |
+            One or more Assembly objects to assess.
+        long-hint : |
+            Each assembly is run separately in BUSCO genome mode, and all results are collected into one report.
+
+    lineage_mode :
+        ui-name : |
+            Lineage selection
+        short-hint : |
+            Use a named lineage dataset, or let BUSCO place the assembly automatically.
+        long-hint : |
+            A named, closely related lineage gives the most informative score and runs fastest. Auto-lineage suits MAGs or organisms of unknown origin: it first runs the domain-level datasets, then places the assembly on a tree with SEPP. Any dataset not already cached in the app's reference data is downloaded at run time.
+
+    lineage_dataset :
+        ui-name : |
+            Lineage dataset
+        short-hint : |
+            BUSCO dataset name, e.g. bacteria_odb12.2 or enterobacterales_odb12.2.
+        long-hint : |
+            Choose the most specific lineage that contains your organism. Names follow &lt;clade&gt;_odb12.2; the full list comes from `busco --list-datasets` and the BUSCO website. This field is ignored in the auto-lineage modes.
+
+    euk_predictor :
+        ui-name : |
+            Eukaryotic gene predictor
+        short-hint : |
+            Gene finder for eukaryotic lineages. Prokaryotic lineages always use Prodigal.
+        long-hint : |
+            Miniprot is BUSCO's default: fast, but its predicted sequences can contain internal stop codons (reported as E%). MetaEuk is often faster on fungi and uses less memory. Augustus is the slowest, but its gene models are the most reliable for downstream use.
+
+    contig_break :
+        ui-name : |
+            Contig break (Ns)
+        short-hint : |
+            Number of consecutive Ns that split a scaffold into contigs for the BBTools statistics. BUSCO default is 10.
+        long-hint : |
+            This only affects the reported contig counts and contig N50, not the BUSCO score.
+
+    evalue :
+        ui-name : |
+            BLAST e-value
+        short-hint : |
+            E-value cutoff for BLAST searches. BUSCO default is 0.001.
+        long-hint : |
+            This only has an effect in BLAST-based pipelines (Augustus, prokaryotic transcriptome).
+
+    limit :
+        ui-name : |
+            Candidate regions per BUSCO
+        short-hint : |
+            How many BLAST candidate regions to consider per BUSCO. BUSCO default is 3.
+        long-hint : |
+            This only has an effect in BLAST-based pipelines (Augustus, prokaryotic transcriptome).
+
+    skip_bbtools :
+        ui-name : |
+            Skip assembly statistics
+        short-hint : |
+            Skip the BBTools N50 / contig statistics step.
+        long-hint : |
+            This saves a little time; the BUSCO score itself is unaffected.
+
+description : |
+    <p>BUSCO assesses how complete a genome assembly is by searching it for near-universal single-copy orthologs selected from OrthoDB. Each marker is classified as Complete (single-copy or duplicated), Fragmented, or Missing.</p>
+    <p>This app runs <b>BUSCO v6.1.0</b> in genome mode. Prokaryotic datasets use Prodigal; eukaryotic datasets use Miniprot by default, with MetaEuk or Augustus as alternatives. The report shows a summary table and a BUSCO plot, and flags warnings such as low completeness (which may mean the wrong lineage) or high duplication. It also lists the exact commands that were run. The full per-assembly BUSCO output is available as a download.</p>
+    <p>When you report results, give the notation (e.g. C:98.1%[S:97.5%,D:0.6%],F:0.5%,M:1.4%,n:124), the dataset name <i>and</i> its creation date, and the BUSCO version.</p>
+
+publications :
+    -
+        display-text: |
+            Tegenfeldt F, Kuznetsov D, Manni M, Berkeley M, Zdobnov EM, Kriventseva EV. OrthoDB and BUSCO update: annotation of orthologs with wider sampling of genomes. Nucleic Acids Research. 2025;53(D1):D516-D522.
+        link: https://doi.org/10.1093/nar/gkae987
+    -
+        display-text: |
+            Manni M, Berkeley MR, Seppey M, Simao FA, Zdobnov EM. BUSCO Update: Novel and Streamlined Workflows along with Broader and Deeper Phylogenetic Coverage for Scoring of Eukaryotic, Prokaryotic, and Viral Genomes. Molecular Biology and Evolution. 2021;38(10):4647-4654.
+        link: https://doi.org/10.1093/molbev/msab199
+    -
+        display-text: |
+            BUSCO source code
+        link: https://gitlab.com/ezlab/busco
